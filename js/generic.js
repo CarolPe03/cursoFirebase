@@ -19,7 +19,8 @@ var firebaseConfig = {
         document.getElementById("itemLibro").style.display="none";
         document.getElementById("itemPrestamos").style.display="none";
         document.getElementById("itemRegistro").style.display="inline-block";
-
+       
+      if(document.getElementById("divRedes"))
         document.getElementById("divRedes").style.visibility="visible";
         document.getElementById("divDatosUsu").style.visibility="hidden"
       }else {
@@ -28,10 +29,15 @@ var firebaseConfig = {
         document.getElementById("itemLibro").style.display="inline-block";
         document.getElementById("itemPrestamos").style.display="inline-block";
         document.getElementById("itemRegistro").style.display="none";
-
+     
+      if(document.getElementById("divRedes"))
         document.getElementById("divRedes").style.visibility="hidden";
         document.getElementById("divDatosUsu").style.visibility="visible"
-   
+   if(res.displayName!=null)
+   document.getElementById("1blNombreUsuario").innerHTML="Bienvenid@: "+ res.displayName;
+   else
+   document.getElementById("1blNombreUsuario").innerHTML="Bienvenid@: "+ res.email;
+  
       }
     });
   }

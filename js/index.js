@@ -1,3 +1,6 @@
+
+
+
 function iniciarSesion() {
     var email = document.getElementById("txtcorreoIngresar").value;
     var password = document.getElementById("txtcotraIngresar").value;

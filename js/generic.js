@@ -10,3 +10,14 @@ var firebaseConfig = {
   };
 
   firebase.initializeApp(firebaseConfig);
+
+  function Salir(){
+   firebase.auth().signOut().then(resp=>{
+    document.location.href="index.html"
+    console.log("Cerrar sesion");
+   })
+   .catch(err => {
+     console.error(err);
+     alert(err);
+       });
+}

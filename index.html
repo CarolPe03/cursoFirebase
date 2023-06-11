@@ -22,7 +22,8 @@
 
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Registro</a>
+                <a class="nav-link active" aria-current="page" href="#"
+                data-bs-toggle="modal" data-bs-target="#exampleModal">Registro</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link active" href="./tipoLibro.html">Tipo libro</a>
@@ -49,7 +50,53 @@ col-md-3">
 <label class="mr-2 text-white" id="1blNombreUsuario"></label>
 <img id="imgFotoUsuario" src="./img/noUsuario.png" width="40" height="40">
 </div>
-    </div></div>
+    </div>
+  </div>
+
+    <div class="d-flex justify-content-center mt-5" id="divRedes">
+      <img onclick="authGoogle()" class="ml-2"  src="./img/google.png" width="50" height="50">
+      <img onclick="authGit()" class="ml-2" src="./img/git.png" width="50" height="50">
+      <img onclick="authTwitter()" class="ml-2" src="./img/twitter.png" width="50" height="50">
+      <img onclick="authFacebook()" class="ml-2" src="./img/facebook.png" width="50" height="50">
+    </div>
+
+    <div class="row">
+    <div class="form-group col-md-6 m-auto">
+      <label>Ingrese correo</label>
+      <input type="text" id="txtcorreoIngresar" class="form-control">
+      <label>Ingrese contraseña</label>
+      <input type="password" id="txtcotraIngresar" class="form-control">
+      <button onclick="iniciarSesion()" class="btn btn-primary btn-block mt-4">Iniciar sesion</button>
+    </div>
+  </div>
+  <!-- Modal -->
+<!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro de usuario</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label >Correo:</label>
+          <input id="txtcorreo" class="form-control" type="email">
+          <label >Contraseña:</label>
+          <input id="txtcontra" class="form-control" type="password">
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary">Guardar</button>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>

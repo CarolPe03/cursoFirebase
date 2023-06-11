@@ -11,6 +11,30 @@ var firebaseConfig = {
 
   firebase.initializeApp(firebaseConfig);
 
+  function verAuth(){
+    firebase.auth().onAuthStateChanged(res=>{
+      if(res==null){
+        document.getElementById("itemSalir").style.display="none";
+        document.getElementById("itemTipoLibro").style.display="none";
+        document.getElementById("itemLibro").style.display="none";
+        document.getElementById("itemPrestamos").style.display="none";
+        document.getElementById("itemRegistro").style.display="inline-block";
+
+        document.getElementById("divRedes").style.visibility="visible";
+        document.getElementById("divDatosUsu").style.visibility="hidden"
+      }else {
+        document.getElementById("itemSalir").style.display="inline-block";
+        document.getElementById("itemTipoLibro").style.display="inline-block";
+        document.getElementById("itemLibro").style.display="inline-block";
+        document.getElementById("itemPrestamos").style.display="inline-block";
+        document.getElementById("itemRegistro").style.display="none";
+
+        document.getElementById("divRedes").style.visibility="hidden";
+        document.getElementById("divDatosUsu").style.visibility="visible"
+   
+      }
+    });
+  }
   function Salir(){
    firebase.auth().signOut().then(resp=>{
     document.location.href="index.html"

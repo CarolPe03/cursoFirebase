@@ -1,5 +1,7 @@
 
-
+window.onload=function(){
+    verAuth();
+}
 
 function iniciarSesion() {
     var email = document.getElementById("txtcorreoIngresar").value;

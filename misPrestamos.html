@@ -8,48 +8,47 @@
 </head>
 <body>
 
+  <div class="bg-dark">
+    <div class="d-flex justify-content-center row">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-md-9">
+   <div class="container-fluid">
+     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+     </button>
+     <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 
+       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+         <li class="nav-item" id="itemRegistro">
+           <a class="nav-link active" aria-current="page" href="#"
+           data-bs-toggle="modal" data-bs-target="#exampleModal">Registro</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link active" id="itemTipoLibro" href="./tipoLibro.html">Tipo libro</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link active" id="itemLibro" href="./libro.html" tabindex="-1" aria-disabled="true">Libro</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link active " id="itemPrestamos" href="./misPrestamos.html" tabindex="-1" aria-disabled="true">Prestamos</a>
+         </li>
+         <li class="nav-item">
+           <a class="nav-link active "  id="itemSalir" tabindex="-1" 
+           aria-disabled="true" onclick="Salir()">Salir</a>
+         </li>
+       </ul>
 
-
-     <div class="bg-dark">
-         <div class="d-flex justify-content-center row">
-             <nav class="navbar navbar-expand-lg navbar-dark bg-dark col-md-9">
-        <div class="container-fluid">
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-              <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Registro</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="./tipoLibro.html">Tipo libro</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active " href="./libro.html" tabindex="-1" aria-disabled="true">Libro</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active " href="./misPrestamos.html" tabindex="-1" aria-disabled="true">Prestamos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" tabindex="-1" 
-                aria-disabled="true" onclick="Salir()">Salir</a>
-              </li>
-            </ul>
-
-          </div>
-        </div>
-      </nav>
-<!-- Foto y nombre de ka persona logueada -->
+     </div>
+   </div>
+ </nav>
+<!-- Foto y nombre de la persona logueada -->
 <div id="divDatosUsu" style="visibility: hidden;"
 class="text-white d-flex justify-content-center align-items-center bg-dark
 col-md-3">
 <label class="mr-2 text-white" id="1blNombreUsuario"></label>
 <img id="imgFotoUsuario" src="./img/noUsuario.png" width="40" height="40">
 </div>
-    </div></div>
+</div>
+</div>
 
     <h1>Mis prestamos</h1>
    <!-- Agrega los archivos necesarios de Firebase -->
@@ -60,6 +59,7 @@ col-md-3">
    <!-- JavaScript Bundle with Popper -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="./js/generic.js"></script>
+    <script src="./js/misPrestamos.js"></script>
 
   
   </body>

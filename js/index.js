@@ -23,19 +23,36 @@ function iniciarSesion() {
           document.getElementById("alertErrorLogueo").innerHTML=err;
         });
 }
+function abrirModalRegistro(){
+    document.getElementById("alertaErrorRegistro").style.display="block";
+    document.getElementById("alertaErrorRegistro").innerHTML=""
 
-function createUser(){
-    var email= document.getElementById("txtcorreo").value;
-    var password= document.getElementById("txtcontra").value;
-    firebase.auth().createUserWithEmailAndPassword(email,password)
-    .then(res=>{
-        alert("Se registro correctamente");
-        document.getElementById("btnCancelar").click();
-    }).catch(err=>{
-        alert("Ocurrio un error")
-    });
 }
+function createUser() {
+    var name = document.getElementById("txtname").value;
+    var email = document.getElementById("txtcorreo").value;
+    var password = document.getElementById("txtcontra").value;
+    if(name==""){
+        document.getElementById("alertaErrorRegistro").style.display="block";
+        document.getElementById("alertaErrorRegistro").innerHTML="Debe ingresar un nombre"
+return;    }
 
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+        .then(res => {
+            return res.user.updateProfile({
+                displayName: name
+            });
+        })
+        .then(profile => {
+            alert("Se registró correctamente");
+            document.getElementById("btnCancelar").click();
+            //CERRAR SESION
+            firebase.auth().signOut();
+        })
+        .catch(err => {
+            alert("Ocurrió un error");
+        });
+}
 function authGoogle(){
     const providerGoogle = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(providerGoogle).then(res=>{

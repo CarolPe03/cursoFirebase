@@ -45,3 +45,12 @@ function authGoogle(){
         alert(err);
     });
 }
+function authGit(){
+    const providerGithub = new firebase.auth.GithubAuthProvider();
+    firebase.auth().signInWithPopup(providerGithub).then(res=>{
+        console.log(res);
+        document.location.href="./misPrestamos.html";
+    }).catch(err=>{
+        alert(err);
+    });
+}

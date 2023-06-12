@@ -35,3 +35,13 @@ function createUser(){
         alert("Ocurrio un error")
     });
 }
+
+function authGoogle(){
+    const providerGoogle = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(providerGoogle).then(res=>{
+        console.log(res);
+        document.location.href="./misPrestamos.html";
+    }).catch(err=>{
+        alert(err);
+    });
+}

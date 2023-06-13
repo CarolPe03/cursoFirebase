@@ -56,6 +56,30 @@ return;    }
 function authGoogle(){
     const providerGoogle = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(providerGoogle).then(res=>{
+        var user=res.user;
+        return firebase.firestore().collection("datosUsuarios").doc(user.uid)
+        .get().then(el=>{
+            var inf=el.data();
+            if(inf==null  || inf==inderfined ){
+                //Es su primera vez
+                return firebase.firestore().collection("datosUsuario").doc(user.uid).set({
+                    nombre: res.additionalUserInfo.profile.given_name,
+                    apellido: res.additionalUserInfo.profile.family_name,
+                    email: user.email,
+                    displayName: user.displayName,
+                    photoURL: user.photoURL,
+                    provider: res.additionalUserInfo.providerId,
+                    phoneNumber: user.phoneNumber==null ? "": user.phoneNumber
+                }).then(respuesta=>{
+                    document.location.href="./misPrestamos.html"
+                }).catch(err=>{
+                    alert("Ocurrio un error al registrar en la bd")
+                })
+            }else{
+                //Ya existe(no registro bd el usario)
+            document.location="/misPrestamos.html"
+            }
+        })
         console.log(res);
         document.location.href="./misPrestamos.html";
     }).catch(err=>{
@@ -65,7 +89,15 @@ function authGoogle(){
 function authGit(){
     const providerGithub = new firebase.auth.GithubAuthProvider();
     firebase.auth().signInWithPopup(providerGithub).then(res=>{
-        console.log(res);
+    return firebase.firestore().collection("datosUsuario").doc(usuario.uid)
+    .then(el=>{
+        var inf= el.data();
+        if(inf==null  || inf==inderfined){
+            //No existe bd 
+            
+        }
+
+    })
         document.location.href="./misPrestamos.html";
     }).catch(err=>{
         alert(err);

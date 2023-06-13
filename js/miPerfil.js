@@ -5,6 +5,16 @@ window.onload=function(){
     });
 }
 var user;
+
+function cambiarFoto(archivo) {
+  var file = archivo.files[0];
+  var reader = new FileReader();
+  reader.onloadend = function() {
+    document.getElementById("imgFoto").src = reader.result;
+  };
+  reader.readAsDataURL(file);
+}
+
 function cargarPerfil(){
     user= firebase.auth().currentUser.uid;
     firebase.firestore().collection("datosUsuario").doc(user).get().then(resultado=>{

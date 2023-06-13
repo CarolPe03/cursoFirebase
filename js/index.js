@@ -2,7 +2,6 @@
 window.onload=function(){
     verAuth();
 }
-
 function iniciarSesion() {
     var email = document.getElementById("txtcorreoIngresar").value;
     var password = document.getElementById("txtcotraIngresar").value;
@@ -72,7 +71,6 @@ function createUser() {
         alert(err);
       });
   }
-  
 function authGoogle(){
     const providerGoogle = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(providerGoogle).then(res=>{
@@ -140,12 +138,39 @@ function authGit() {
         });
     });
   }
-function authFacebook(){
+  function authFacebook() {
     const providerFacebook = new firebase.auth.FacebookAuthProvider();
-    firebase.auth().signInWithPopup(providerFacebook).then(res=>{
-        console.log(res);
-        document.location.href="./misPrestamos.html";
-    }).catch(err=>{
-        alert(err);
+    firebase.auth().signInWithPopup(providerFacebook).then(res => {
+      var user = res.user;
+      return firebase.firestore().collection("datosUsuario").doc(res.user.uid)
+        .get().then(el => {
+          var inf = el.data();
+          var userName = res.additionalUserInfo.username;
+  
+          if (inf == null || inf == undefined) {
+            // Registrar
+            return firebase.firestore().collection("datosUsuario").doc(res.user.uid)
+              .set({
+                nombre: "",
+                apellido: "",
+                email: user.email,
+                displayName: res.additionalUserInfo.username || "",
+                photoURL: res.user.photoURL,
+                provider: res.additionalUserInfo.providerId,
+                phoneNumber: res.user.phoneNumber,
+                descripcion: ""
+              }).then(() => {
+                document.location.href = "./misPrestamos.html";
+              }).catch(err => {
+                alert(err);
+              });
+          } else {
+            document.location.href = "./misPrestamos.html";
+          }
+        }).catch(err => {
+          alert(err);
+        });
     });
-}
+  }
+  
+  

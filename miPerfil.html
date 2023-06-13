@@ -46,68 +46,7 @@
           </div>
         </div>
       </nav>
-<!-- Foto y nombre de la persona logueada -->
-<div id="divDatosUsu" style="visibility: hidden;"
-class="text-white d-flex justify-content-center align-items-center bg-dark
-col-md-3">
-<label class="mr-2 text-white" id="1blNombreUsuario"></label>
-<img id="imgFotoUsuario" style="cursor: pointer;" onclick="Salir()" style="cursor: pointer;" src="./img/noUsuario.png" width="40" height="40">
-</div>
-    </div>
-  </div>
 
-    <div class="d-flex justify-content-center mt-5" id="divRedes">
-      <img onclick="authGoogle()" class="ml-2"  src="./img/google.png" width="50" height="50">
-      <img onclick="authGit()" class="ml-2" src="./img/git.png" width="50" height="50">
-      <img onclick="authTwitter()" class="ml-2" src="./img/twitter.png" width="50" height="50">
-      <img onclick="authFacebook()" class="ml-2" src="./img/facebook.png" width="50" height="50">
-    </div>
-
-    <div class="row">
-    <div class="form-group col-md-6 m-auto">
-      <label>Ingrese correo</label>
-      <input type="text" id="txtcorreoIngresar" class="form-control">
-      <label>Ingrese contraseña</label>
-      <input type="password" id="txtcotraIngresar" class="form-control">
-      <button onclick="iniciarSesion()" class="btn btn-primary btn-block mt-4">Iniciar sesion</button>
-    </div>
-  </div>
-  <div class="alert alert-danger" id="alertErrorLogueo" role="alert" style="display: none;">
-          
-  </div>  
-  <!-- Modal -->
-<!-- Button trigger modal -->
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Registro de usuario</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <label>Nombre de usuario: </label>
-          <input id="txtname" class="form-control" type="text">
-          <label >Correo:</label>
-          <input id="txtcorreo" class="form-control" type="email">
-          <label >Contraseña:</label>
-          <input id="txtcontra" class="form-control" type="password">
-        </div>
-        <div class="modal-footer">
-          <button type="button" id="btnCancelar" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" onclick="createUser()" class="btn btn-primary">Guardar</button>
-        </div>
-        <div id="alertaErrorRegistro" class="alert alert-danger" role="alert" style="display: none;">
-          
-        </div>  
-      </div>
-      </div>
-    </div>
-  </div>
-</div>
 
 
    <!-- Agrega los archivos necesarios de Firebase -->

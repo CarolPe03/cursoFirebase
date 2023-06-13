@@ -9,6 +9,7 @@ function iniciarSesion() {
 
     firebase.auth().signInWithEmailAndPassword(email, password)
         .then(res => {
+   
             document.location.href="./misPrestamos.html";
             //Imagen
             if (res.user.photoURL!=null) {
@@ -32,27 +33,46 @@ function createUser() {
     var name = document.getElementById("txtname").value;
     var email = document.getElementById("txtcorreo").value;
     var password = document.getElementById("txtcontra").value;
-    if(name==""){
-        document.getElementById("alertaErrorRegistro").style.display="block";
-        document.getElementById("alertaErrorRegistro").innerHTML="Debe ingresar un nombre"
-return;    }
-
+    
+    if (name == "") {
+      document.getElementById("alertaErrorRegistro").style.display = "block";
+      document.getElementById("alertaErrorRegistro").innerHTML = "Debe ingresar un nombre";
+      return;
+    }
+  
     firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(res => {
-            return res.user.updateProfile({
-                displayName: name
+      .then(res => {
+        var usuario = res.user;
+        return res.user.updateProfile({
+          displayName: name
+        }).then(() => {
+          alert("Se registró correctamente");
+          document.getElementById("btnCancelar").click();
+          // CERRAR SESION
+          firebase.auth().signOut();
+          // Guardo información en la base de datos
+          return firebase.firestore().collection("datosUsuario").doc(usuario.uid)
+            .set({
+              nombre: "",
+              apellido: "",
+              email: email,
+              displayName: usuario.displayName,
+              photoURL: usuario.photoURL,
+              provider: res.additionalUserInfo.providerId,
+              phoneNumber: usuario.phoneNumber == null ? "" : usuario.phoneNumber,
+              descripcion: ""
+            }).then(() => {
+              document.location.href = "./index.html";
+            }).catch(err => {
+              alert(err);
             });
-        })
-        .then(profile => {
-            alert("Se registró correctamente");
-            document.getElementById("btnCancelar").click();
-            //CERRAR SESION
-            firebase.auth().signOut();
-        })
-        .catch(err => {
-            alert("Ocurrió un error");
         });
-}
+      })
+      .catch(err => {
+        alert(err);
+      });
+  }
+  
 function authGoogle(){
     const providerGoogle = new firebase.auth.GoogleAuthProvider();
     firebase.auth().signInWithPopup(providerGoogle).then(res=>{
@@ -87,40 +107,6 @@ function authGoogle(){
         alert(err);
     });
 }
-// function authGit(){
-//     const providerGithub = new firebase.auth.GithubAuthProvider();
-//     firebase.auth().signInWithPopup(providerGithub).then(res=>{
-//     return firebase.firestore().collection("datosUsuario").doc(usuario.uid)
-//     .then(el=>{
-//         var inf= el.data();
-//         if(inf==null  || inf==inderfined){
-//             //No existe bd 
-//             var userName= res.additionalUserInfo.username;
-//             return firebase.firestore().collection("datosUsuario").doc(usuarios.uid)
-//             .set({
-//                 nombre:"",
-//                 apellido:"",
-//                 email:userName,
-//                 photoURL:user.photoURL,
-//                 provider:res.additionalUserInfo.providerId,
-//                 phoneNumber: usuario.phoneNumber,
-//                 descripcion:""
-//             }).then(res=>{
-//                 document.location.href="./misPrestamos.hmtl"
-//             }).catch(err=>{
-//                 alert(err)
-//             })
-//         }else{
-//             document.location.href="./misPrestamos.html"
-//         }
-
-//     })
-//         document.location.href="./misPrestamos.html";
-//     }).catch(err=>{
-//         alert(err);
-//     });
-// }
-
 function authGit() {
     const providerGithub = new firebase.auth.GithubAuthProvider();
     firebase.auth().signInWithPopup(providerGithub).then(res => {
@@ -154,8 +140,6 @@ function authGit() {
         });
     });
   }
-  
-  
 function authFacebook(){
     const providerFacebook = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(providerFacebook).then(res=>{

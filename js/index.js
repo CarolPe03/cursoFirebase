@@ -69,7 +69,8 @@ function authGoogle(){
                     displayName: user.displayName,
                     photoURL: user.photoURL,
                     provider: res.additionalUserInfo.providerId,
-                    phoneNumber: user.phoneNumber==null ? "": user.phoneNumber
+                    phoneNumber: user.phoneNumber==null ? "": user.phoneNumber,
+                    descripcion:""
                 }).then(respuesta=>{
                     document.location.href="./misPrestamos.html"
                 }).catch(err=>{
@@ -86,23 +87,75 @@ function authGoogle(){
         alert(err);
     });
 }
-function authGit(){
-    const providerGithub = new firebase.auth.GithubAuthProvider();
-    firebase.auth().signInWithPopup(providerGithub).then(res=>{
-    return firebase.firestore().collection("datosUsuario").doc(usuario.uid)
-    .then(el=>{
-        var inf= el.data();
-        if(inf==null  || inf==inderfined){
-            //No existe bd 
-            
-        }
+// function authGit(){
+//     const providerGithub = new firebase.auth.GithubAuthProvider();
+//     firebase.auth().signInWithPopup(providerGithub).then(res=>{
+//     return firebase.firestore().collection("datosUsuario").doc(usuario.uid)
+//     .then(el=>{
+//         var inf= el.data();
+//         if(inf==null  || inf==inderfined){
+//             //No existe bd 
+//             var userName= res.additionalUserInfo.username;
+//             return firebase.firestore().collection("datosUsuario").doc(usuarios.uid)
+//             .set({
+//                 nombre:"",
+//                 apellido:"",
+//                 email:userName,
+//                 photoURL:user.photoURL,
+//                 provider:res.additionalUserInfo.providerId,
+//                 phoneNumber: usuario.phoneNumber,
+//                 descripcion:""
+//             }).then(res=>{
+//                 document.location.href="./misPrestamos.hmtl"
+//             }).catch(err=>{
+//                 alert(err)
+//             })
+//         }else{
+//             document.location.href="./misPrestamos.html"
+//         }
 
-    })
-        document.location.href="./misPrestamos.html";
-    }).catch(err=>{
-        alert(err);
+//     })
+//         document.location.href="./misPrestamos.html";
+//     }).catch(err=>{
+//         alert(err);
+//     });
+// }
+
+function authGit() {
+    const providerGithub = new firebase.auth.GithubAuthProvider();
+    firebase.auth().signInWithPopup(providerGithub).then(res => {
+      return firebase.firestore().collection("datosUsuario").doc(res.user.uid)
+        .get().then(el => {
+          var inf = el.data();
+          if (inf == null || inf == undefined) {
+            // No existe bd
+            var userName = res.additionalUserInfo.username;
+            return firebase.firestore().collection("datosUsuario").doc(res.user.uid)
+              .set({
+                nombre: "",
+                apellido: "",
+                email: res.user.email,
+                displayName: userName,
+                photoURL: res.user.photoURL,
+                provider: res.additionalUserInfo.providerId,
+                phoneNumber: res.user.phoneNumber,
+                descripcion: ""
+              }).then(() => {
+                document.location.href = "./misPrestamos.html";
+              }).catch(err => {
+                alert(err);
+              });
+          } else {
+            document.location.href = "./misPrestamos.html";
+          }
+        })
+        .catch(err => {
+          alert(err);
+        });
     });
-}
+  }
+  
+  
 function authFacebook(){
     const providerFacebook = new firebase.auth.FacebookAuthProvider();
     firebase.auth().signInWithPopup(providerFacebook).then(res=>{
